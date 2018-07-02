@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AttSysAdmin"
+             x:Class="AttSysAdmin.Views.OngoingAttendanceView"
+             Title="Ongoing Attendance">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:NegateBooleanConverter x:Key="invert" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <AbsoluteLayout VerticalOptions="Fill">
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <!--<Label Text="There is currently no ongoing attendance at the moment. Please start an attendance from the course list's tab" FontSize="Large" IsEnabled="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />-->
+                <Frame HasShadow="True" Margin="6" BackgroundColor="#f5edf7" x:Name="ongoingAttendance">
+                    <StackLayout>
+                        <Label x:Name="course_name" FontAttributes="Bold" FontSize="Large" Margin="0,10,0,3"/>
+                        <Label x:Name="code" FontAttributes="Bold" Margin="0,3,0,3"/>
+                        <Label x:Name="credits" FontSize="Small" FontAttributes="Italic" Margin="0,3,0,10"/>
+                        <Label x:Name="attendance_name" FontAttributes="Bold" TextColor="#8b35ba" FontSize="Small" Margin="0,3,0,10"/>
+                        <Button Text="Stop Attendance" IsEnabled="{Binding RetryButtonActive, Converter={StaticResource invert}}" Command="{Binding StopAttendanceCommand}" BackgroundColor="#d82d97" TextColor="White"  HorizontalOptions="FillAndExpand" HeightRequest="55"/>
+                        <Button Text="View Present Students" Command="{Binding ViewPresentCommand}" BackgroundColor="MediumPurple" TextColor="White"  HorizontalOptions="FillAndExpand" HeightRequest="55"/>
+                        <Button Text="Refresh Data" IsVisible="{Binding RetryButtonActive}" Command="{Binding RefreshCommand}" BackgroundColor="Red" TextColor="White"  HorizontalOptions="FillAndExpand" HeightRequest="55"/>
+                        <Label Text="{Binding ErrorStatus}" HorizontalTextAlignment="Center" TextColor="Red" IsEnabled="{Binding IsError}" IsVisible="{Binding IsError}"/>
+                        
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Black" Opacity="0.5" InputTransparent="false" IsVisible="{Binding IsBusy}" />
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HasShadow="True" IsEnabled="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsEnabled="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
+                    <Label Text="{Binding LoadingStatus}" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

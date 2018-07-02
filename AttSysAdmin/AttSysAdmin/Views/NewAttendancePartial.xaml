@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             x:Class="AttSysAdmin.Views.NewAttendancePartial"
+                  xmlns:local="clr-namespace:AttSysAdmin">
+
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <local:NegateBooleanConverter x:Key="invert" />
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+    <StackLayout x:Name="rootStack" Margin="10,0,10,0" Padding="5,10,5,15"  BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0">
+            <StackLayout Padding="10" Margin="10,5,10,5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Label Text="Start A New Attendance Session" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold"/>
+                <Label x:Name="courseTitleLabel" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center"/>
+                <Entry Placeholder="Attendance tag" Text="{Binding AttendanceName}" Margin="0,5,0,0"/>
+                <!--<Label Text="Select Venue:" FontAttributes="Bold" Margin="0,5,0,0"/>-->
+                <Picker Title="Select Venue" x:Name="venuePicker"  SelectedItem="{Binding Venue}" />
+
+                <Button Text="Begin Attendance" Command="{Binding NewAttendanceCommand}" IsEnabled="{Binding RetryButtonActive, Converter={StaticResource invert}}" BackgroundColor="MediumPurple" TextColor="White"  HorizontalOptions="FillAndExpand" HeightRequest="55"/>
+                <Button Text="Refresh Data" IsVisible="{Binding RetryButtonActive}" Command="{Binding RefreshCommand}" BackgroundColor="Red" TextColor="White"  HorizontalOptions="FillAndExpand" HeightRequest="55"/>
+                <Label Text="{Binding ErrorStatus}" HorizontalTextAlignment="Center" TextColor="Red" IsEnabled="{Binding IsError}" IsVisible="{Binding IsError}"/>
+            </StackLayout>
+            
+            <BoxView Margin="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Transparent" InputTransparent="false" IsVisible="{Binding IsBusy}" />
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HasShadow="True" IsEnabled="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsEnabled="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
+                    <Label Text="{Binding LoadingStatus}" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
+    </StackLayout>     
+</pages:PopupPage>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AttSysAdmin.Views.SingleCourse"
+             BackgroundColor="#f7eff9"
+             Title="Course">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Label x:Name="name" FontSize="Large" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+            <Label x:Name="code" FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="Center"/>
+            <Label x:Name="credits" HorizontalTextAlignment="Center" FontAttributes="Italic"/>
+            <Frame HasShadow="True">
+                <Label x:Name="description"/>
+            </Frame>
+            <Button x:Name="StartOrStop"  HeightRequest="50" TextColor="White"/>
+            <Button Clicked="ViewPreviousClicked" Text="View Previous Attendances" BackgroundColor="#7a1ba0" HeightRequest="50" TextColor="White"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

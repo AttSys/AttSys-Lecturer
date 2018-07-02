@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AttSysAdmin.Views.Login">
+    <ContentPage.Content>
+        <AbsoluteLayout VerticalOptions="Fill">
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Image Source="LecturerLogo.png" Aspect="AspectFit"  HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="300" />
+                <Entry Text="{Binding Username}" Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20,10,20,10" HorizontalTextAlignment="Center" TextColor="Purple"/>
+                <Entry Text="{Binding Password}" Placeholder="Password" Margin="20,10,20,20" HorizontalTextAlignment="Center" TextColor="Purple" IsPassword="True"/>
+                <Button x:Name="login" Command="{Binding LoginCommand}" Text="Lecturer Login" BackgroundColor="MediumPurple" Margin="20,0,20,0" HeightRequest="60" TextColor="White"/>
+                <Label Text="{Binding ErrorStatus}" HorizontalTextAlignment="Center" TextColor="Red" IsEnabled="{Binding IsError}" IsVisible="{Binding IsError}"/>
+            </StackLayout>
+            <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Black" Opacity="0.4" InputTransparent="false" IsVisible="{Binding IsBusy}" />
+
+            <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HasShadow="True" IsEnabled="{Binding IsBusy}"  IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                <StackLayout>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsEnabled="{Binding IsBusy}"  IsVisible="{Binding IsBusy}"/>
+                    <Label Text="{Binding LoadingStatus}" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

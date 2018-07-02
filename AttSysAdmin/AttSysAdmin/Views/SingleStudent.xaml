@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AttSysAdmin.Views.SingleStudent"
+             Title="{Binding full_name}"
+             BackgroundColor="#fef9ff">
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="Center">
+            <Grid VerticalOptions="FillAndExpand" Margin="6,0,6,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,34,0,6" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Frame HasShadow="True">
+                        <Image Source="{Binding reg_pic}"  Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    </Frame>
+                    <Label Text="Registered Image" FontAttributes="Italic" HorizontalOptions="Center"/>                    
+                </StackLayout>
+              
+                <StackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,6,0,10">
+                    <Frame HasShadow="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Image Source="{Binding picture}"  Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                    </Frame>
+                    <Label Text="Attendance Image" FontAttributes="Italic" HorizontalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2" HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.ColumnSpan="3">
+                    <BoxView HeightRequest="1" Color="Black"/>
+
+                    <Label Text="{Binding mat_no, StringFormat='Mat Number: {0}'}" HorizontalTextAlignment="Center" FontSize="Micro"
+                           TextColor="#8b35ba"/>
+                    <Label Text="{Binding timestamp, StringFormat='Attendance Time: {0:hh:mm tt, dd/MM/yyyy}'}" HorizontalTextAlignment="Center" FontSize="Micro" TextColor="#8b35ba"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

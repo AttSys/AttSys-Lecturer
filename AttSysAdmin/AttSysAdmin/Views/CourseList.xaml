@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AttSysAdmin.Views.CourseList"
+             Title="Assigned Courses"
+             BackgroundColor="#fef9ff">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ListView ItemsSource="{Binding CoursesList}"
+                          ItemSelected="SingleCourseSelected"
+                          HasUnevenRows="True"
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}"
+                          VerticalOptions="FillAndExpand"
+                          SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <!--<MenuItem Clicked="ViewCourseAttendanceClicked" CommandParameter="{Binding .}" Text="View Previous Attendances" />-->
+                                </ViewCell.ContextActions>
+                                <ViewCell.View>
+                                    <Frame HasShadow="True" Margin="6">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="58"/>
+                                                <ColumnDefinition Width="*"/>
+
+                                            </Grid.ColumnDefinitions>
+                                            <Image VerticalOptions="Center" Source="book.png" Grid.Column="0" Margin="0,0,6,0"  />
+                                            <StackLayout Grid.Column="1"  Margin="4,0,10,0">
+                                                <Label Text="{Binding name}" FontAttributes="Bold" FontSize="Default"/>
+                                                <Label Text="{Binding code}" FontAttributes="Bold"/>
+                                                <Label Text="{Binding credits, StringFormat='{0} Credits'}" FontSize="Micro" FontAttributes="Italic"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

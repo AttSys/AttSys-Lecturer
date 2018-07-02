@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AttSysAdmin.Views.PreviousAttendances"
+             Title="Previous Attendance">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ListView x:Name="AttendanceListView"
+                          ItemSelected="SingleAttendanceSelected"
+                          HasUnevenRows="True"                       
+                          VerticalOptions="FillAndExpand"
+                          SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <!--<MenuItem Clicked="ViewCourseAttendanceClicked" CommandParameter="{Binding .}" Text="View Previous Attendances" />-->
+                                </ViewCell.ContextActions>
+                                <ViewCell.View>
+                                    <Frame HasShadow="True" Margin="6">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="*"/>
+
+                                            </Grid.ColumnDefinitions>
+                                            <Image VerticalOptions="Center" Source="record.png" Grid.Column="0" Margin="0,0,6,0"  />
+                                            <StackLayout Grid.Column="1"  Margin="4,2,10,2">
+                                                <Label Text="{Binding name, StringFormat='Tag: {0}'}" FontAttributes="Bold" />
+                                                <Label Text="{Binding venue, StringFormat='Venue: {0}'}" FontAttributes="Bold"/>
+                                                <Label Text="May 20th, 2017" FontAttributes="Italic" FontSize="Micro"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
